@@ -1,10 +1,5 @@
-# escape=`
 FROM mcr.microsoft.com/windows/servercore:1803
 
-RUN powershell -Command `
-    Add-WindowsFeature Web-Server; `
-    Invoke-WebRequest -UseBasicParsing -Uri "https://dotnetbinaries.blob.core.windows.net/servicemonitor/2.0.1.6/ServiceMonitor.exe" -OutFile "C:\ServiceMonitor.exe"
+COPY check-baseimage.ps1 check-baseimage.ps1
 
-EXPOSE 80
-
-ENTRYPOINT ["C:\\ServiceMonitor.exe", "w3svc"]
+RUN powershell -File check-baseimage.ps1
