@@ -4,6 +4,9 @@ $ErrorActionPreference = 'Stop'
 $current=(Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion")
 $currUBR=$current.UBR
 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls -bor 
+[Net.SecurityProtocolType]::Tls11 -bor [Net.SecurityProtocolType]::Tls12
+
 # fetch the maximum version number from MCR by filtering and sorting the JSON result
 $prefix="$($current.CurrentMajorVersionNumber).$($current.CurrentMinorVersionNumber).$($current.CurrentBuildNumber)."
 $json=$(Invoke-WebRequest -UseBasicParsing https://mcr.microsoft.com/v2/windows/servercore/tags/list | ConvertFrom-Json)
