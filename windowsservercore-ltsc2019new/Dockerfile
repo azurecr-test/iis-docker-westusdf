@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
 
 COPY check-baseimage.ps1 check-baseimage.ps1
 
